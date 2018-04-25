@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-12 9:45:46 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="cn.jboa.pojo.BizClaimVouyearStatistics" table="biz_claim_vouyear__statistics" catalog="jboadb">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="totalCount" type="big_decimal">
+            <column name="TOTAL_COUNT" precision="30" not-null="true" />
+        </property>
+        <property name="year" type="long">
+            <column name="YEAR" not-null="true" />
+        </property>
+        <property name="modifyTime" type="date">
+            <column name="MODIFY_TIME" length="0" not-null="true" />
+        </property>
+        <property name="departmentId" type="long">
+            <column name="DEPARTMENT_ID" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

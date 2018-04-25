@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-12 9:45:46 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="cn.jboa.pojo.BizCheckResult" table="biz_check_result" catalog="jboadb">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="bizClaimVoucher" class="cn.jboa.pojo.BizClaimVoucher" fetch="select">
+            <column name="CLAIM_ID" not-null="true" />
+        </many-to-one>
+        <property name="checkTime" type="date">
+            <column name="CHECK_TIME" length="0" not-null="true" />
+        </property>
+        <many-to-one name="checkerSn" class="cn.jboa.pojo.SysEmployee" fetch="select">
+            <column name="CHECKER_SN" not-null="true" />
+        </many-to-one>
+        <property name="result" type="string">
+            <column name="RESULT" length="50" not-null="true" />
+        </property>
+        <property name="comm" type="string">
+            <column name="COMM" length="500" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

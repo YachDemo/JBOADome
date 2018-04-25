@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-12 9:45:46 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="cn.jboa.pojo.BizClaimVoucherDetail" table="biz_claim_voucher_detail" catalog="jboadb">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="bizClaimVoucher" class="cn.jboa.pojo.BizClaimVoucher" fetch="select">
+            <column name="MAIN_ID" not-null="true" />
+        </many-to-one>
+        <property name="item" type="string">
+            <column name="ITEM" length="20" not-null="true" />
+        </property>
+        <property name="account" type="big_decimal">
+            <column name="ACCOUNT" precision="20" not-null="true" />
+        </property>
+        <property name="des" type="string">
+            <column name="DES" length="200" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

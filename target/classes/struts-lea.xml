@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	<struts>
+		<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+		<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+		<package name="lea" extends="struts-default" namespace="/lea">
+		<interceptors>
+    		<!-- 定义拦截器 -->
+    		<interceptor name="myInter" class="cn.jboa.common.AuthInterceptor"></interceptor>
+    		<interceptor-stack name="myStack">
+    			<interceptor-ref name="myInter"></interceptor-ref>
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<!-- 定义默认拦截器 -->
+    	<default-interceptor-ref name="myStack" />
+    	<default-action-ref name="defaultAction"></default-action-ref>
+    	<!-- 定义全局结果 -->
+    	<global-results>
+    		<result name="login">/WEB-INF/page/login.jsp</result>
+    		<result name="input">/WEB-INF/page/500.jsp</result>
+    		<result name="error">/WEB-INF/page/500.jsp</result>
+    	</global-results>
+    		<action name="leave" class="leaveAction">
+    			<result name="find_Page">/WEB-INF/page/leave_list_view.jsp</result>
+    			<result name="find_Page_ById">/WEB-INF/page/leave_listById_view.jsp</result>
+    			<result name="modify_lea_ById">/WEB-INF/page/manager/leave_manager_view.jsp</result>
+    			<result name="modify_lea_managerById" type="redirectAction">leave!find_lea_Page</result>
+    			<result name="sava_Tolea">/WEB-INF/page/leave_save_view.jsp</result>
+    			<result name="save_laeve" type="redirectAction">leave!find_lea_Page</result>
+    		</action>
+   		</package>
+	</struts>

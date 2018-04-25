@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-12 9:45:46 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="cn.jboa.pojo.SysEmployee" table="sys_employee" catalog="jboadb">
+        <id name="sn" type="string">
+            <column name="SN" length="50" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sysPosition" class="cn.jboa.pojo.SysPosition" fetch="select">
+            <column name="POSITION_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sysDepartment" lazy="false" class="cn.jboa.pojo.SysDepartment" fetch="select">
+            <column name="DEPARTMENT_ID" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="50" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="50" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="20" not-null="true" />
+        </property>
+        <set name="bizClaimVouchersForCreateSn" inverse="true">
+            <key>
+                <column name="CREATE_SN" length="50" not-null="true" />
+            </key>
+            <one-to-many class="cn.jboa.pojo.BizClaimVoucher" />
+        </set>
+        <set name="bizClaimVouchersForNextDealSn" inverse="true">
+            <key>
+                <column name="NEXT_DEAL_SN" length="50" />
+            </key>
+            <one-to-many class="cn.jboa.pojo.BizClaimVoucher" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-12 9:45:46 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="cn.jboa.pojo.BizLeave" table="biz_leave" catalog="jboadb">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="employeeSn" class="cn.jboa.pojo.SysEmployee" fetch="select">
+            <column name="EMPLOYEE_SN" length="50" not-null="true" />
+        </many-to-one>
+        <property name="starttime" type="timestamp">
+            <column name="STARTTIME" length="0" not-null="true" />
+        </property>
+        <property name="endtime" type="timestamp">
+            <column name="ENDTIME" length="0" not-null="true" />
+        </property>
+        <property name="leaveday" type="big_decimal">
+            <column name="LEAVEDAY" precision="5" scale="1" not-null="true" />
+        </property>
+        <property name="reason" type="string">
+            <column name="REASON" length="500" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="20" />
+        </property>
+        <property name="leavetype" type="string">
+            <column name="LEAVETYPE" length="50" />
+        </property>
+        <many-to-one name="nextDealSn" class="cn.jboa.pojo.SysEmployee" fetch="select">
+            <column name="NEXT_DEAL_SN" length="50" not-null="true" />
+        </many-to-one>
+        <property name="approveOpinion" type="string">
+            <column name="APPROVE_OPINION" length="100" />
+        </property>
+        <property name="createtime" type="timestamp">
+            <column name="CREATETIME" length="0" />
+        </property>
+        <property name="modifytime" type="timestamp">
+            <column name="MODIFYTIME" length="0" />
+        </property>
+    </class>
+</hibernate-mapping>

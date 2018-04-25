@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    
+    <context:component-scan base-package="cn"></context:component-scan>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+       	<property name="url" value="jdbc:mysql://localhost:3306/jboadb?characterEncoding=utf-8" />
+       	<property name="username" value="root" />
+       	<property name="password" value="123" />
+    </bean>
+    <!-- 配置sessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    	<property name="dataSource">
+    		<ref bean="dataSource"/>
+    	</property>
+    	<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.show_sql">true</prop>
+    			<prop key="hibernate.format_sql">true</prop>
+    			<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+    		</props>
+    	</property>
+    	<property name="mappingDirectoryLocations">
+    		<list>
+    			<value>classpath:cn/jboa/pojo/</value>
+    		</list>
+    	</property>
+    	
+    </bean>
+    
+   
+    
+    <!-- 事务管理 -->
+   	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   	</bean>
+   	<tx:advice id="myTx" transaction-manager="transactionManager">
+   		<tx:attributes>
+   			<tx:method name="find*" read-only="true"/>
+   			<tx:method name="modify*" read-only="false" propagation="REQUIRED"/>
+   			<tx:method name="del*" propagation="REQUIRED"/>
+   			<tx:method name="save*" propagation="REQUIRED"/>
+   			<tx:method name="update*" propagation="REQUIRED"/>
+   			<tx:method name="add*" propagation="REQUIRED"/>
+   		</tx:attributes>
+   	</tx:advice>
+   	<aop:config proxy-target-class="true">
+   		<aop:pointcut expression="execution(* cn..*.*(..))" id="myPointcut"/>
+   		<aop:advisor advice-ref="myTx" pointcut-ref="myPointcut"/>
+   	</aop:config>
+   	<!-- <bean id="deptAction" class="cn.hbm.actions.DeptAction" scope="prototype">
+   		<property name="deptService" ref="deptService"></property>
+   	</bean> -->
+   	<task:executor id="executor" pool-size="5"/>
+   	<task:scheduler id="scheduler" pool-size="10"/>
+   	<task:annotation-driven executor="executor" scheduler="scheduler"/>
+    </beans>
