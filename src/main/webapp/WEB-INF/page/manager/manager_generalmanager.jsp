@@ -113,6 +113,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#sptg").click(function() {
+			alert("sd");
 			$("#vll").attr("value","已审核");
 			$("#result").attr("value","通过");
 			$("#formId").submit();

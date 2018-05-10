@@ -137,7 +137,7 @@
 							<li><a href="form-amazeui.html"> <i
 									class="am-icon-angle-right"></i> <span>年度报表</span>
 							</a> <a href="form-line.html"> <i class="am-icon-angle-right"></i>
-							月度报表</a></li>
+							</a></li>
 						</ul></li>
 					<li class="tpl-left-nav-item"><span>&nbsp;</span></li>
 					<li class="tpl-left-nav-item"><a href="login.html"

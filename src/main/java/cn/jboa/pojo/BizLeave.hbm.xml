@@ -6,7 +6,7 @@
     <class name="cn.jboa.pojo.BizLeave" table="biz_leave" catalog="jboadb">
         <id name="id" type="long">
             <column name="ID" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="employeeSn" class="cn.jboa.pojo.SysEmployee" fetch="select">
             <column name="EMPLOYEE_SN" length="50" not-null="true" />

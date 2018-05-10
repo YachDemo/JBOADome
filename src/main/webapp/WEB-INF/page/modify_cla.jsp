@@ -26,9 +26,9 @@
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td>总金额：<input type="text" name="claimVoucher.totalAccount" readonly="readonly"
+				<td>总金额：<input type="text" name="claimVoucher.totalAccount"
 					value="${voucher.totalAccount }" id="totalC" style="border: none;" /></td>
-				<td>填报时间：<input type="text" name="claimVoucher.createTime" readonly="readonly"
+				<td>填报时间：<input type="text" name="claimVoucher.createTime"
 					value="${voucher.createTime }" style="border: none;" /></td>
 				<td>状态：${voucher.status }</td>
 				<td>待处理人： <c:if
